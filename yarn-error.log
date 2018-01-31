@@ -1,0 +1,48 @@
+Arguments: 
+  /Users/enderson/.nvm/versions/node/v8.9.4/bin/node /usr/local/Cellar/yarn/1.3.2/libexec/bin/yarn.js publish
+
+PATH: 
+  /Users/enderson/.nvm/versions/node/v8.9.4/bin:/Users/enderson/tools/emsdk:/Users/enderson/tools/emsdk/clang/e1.37.20_64bit:/Users/enderson/tools/emsdk/node/4.1.1_64bit/bin:/Users/enderson/tools/emsdk/emscripten/1.37.20:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/mysql/bin:/opt/X11/bin:/Applications/Server.app/Contents/ServerRoot/usr/bin:/Applications/Server.app/Contents/ServerRoot/usr/sbin
+
+Yarn version: 
+  1.3.2
+
+Node version: 
+  8.9.4
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+      "name": "htweb-builder-cli",
+      "version": "0.0.2",
+      "description": "A CLI tool to generate npm scripts for both front-end and back-end projects to make the build process convenient.",
+      "main": "index.js",
+      "repository": "https://github.com/enderson-pan/-holytiny-ht-web-builder.git",
+      "author": "Sake <pan.ziqiang@holytiny.com>",
+      "license": "MIT",
+      "bin": {
+          "htwb": "index.js"
+      },
+      "private": false
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: https://registry.yarnpkg.com/htweb-builder-cli: htweb-builder-cli cannot be republished until 24 hours have passed.
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.3.2/libexec/lib/cli.js:62098:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.3.2/libexec/lib/cli.js:123085:22)
+      at emitTwo (events.js:126:13)
+      at Request.emit (events.js:214:7)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.3.2/libexec/lib/cli.js:124068:10)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at Gunzip.<anonymous> (/usr/local/Cellar/yarn/1.3.2/libexec/lib/cli.js:123988:12)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:111:20)

@@ -1,0 +1,12 @@
+{
+    "name": "@holytiny/htweb-builder-cli",
+    "version": "0.0.1",
+    "description": "A npm scripts generator for both front-end and back-end projects. The motivation is to simplify the build process of web projects and to be compatible to all frameworks such as Vue.js and FeathersJs. ",
+    "main": "./src/index.js",
+    "repository": "https://github.com/enderson-pan/-holytiny-ht-web-builder.git",
+    "author": "Sake <pan.ziqiang@holytiny.com>",
+    "license": "MIT",
+    "bin": {
+        "htwb": "./src/index.js"
+    }
+}
