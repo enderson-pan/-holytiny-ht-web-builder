@@ -29,6 +29,7 @@ function main() {
     const babelCli = new BabelCli();
     const babelEnd = babelCli.whichEnd();
     logger.debug(`babelEnd is ${babelEnd}`);
+    logger.debug('Is windows?' + babelCli.isWindows());
 
     const feathersCli = new FeathersCli();
     const feathersEnd = feathersCli.whichEnd();
