@@ -3,7 +3,12 @@
 require('babel-polyfill');
 
 import logger from 'winston';
-import ConfigFile from './ConfigFile';
+import theConfigFile from './ConfigFile';
+
+import BabelCli from './Babel/Babel';
+
+import FeathersCli from './BackEnd/Feathers/Feathers';
+import VueCli from './FrontEnd/Vue/Vue';
 
 logger.level = 'debug';
 
@@ -20,7 +25,19 @@ try {
 
 function main() {
     logger.debug(`${__dirname}`);
-    let configFile = new ConfigFile();
-    logger.debug(configFile.configFilePath);
+    const configFile = theConfigFile;
+    const babelCli = new BabelCli();
+    const babelEnd = babelCli.whichEnd();
+    logger.debug(`babelEnd is ${babelEnd}`);
+
+    const feathersCli = new FeathersCli();
+    const feathersEnd = feathersCli.whichEnd();
+    logger.debug(`feathersEnd is ${feathersEnd}`);
+
+    const vueCli = new VueCli();
+    const vueEnd = vueCli.whichEnd();
+    logger.debug(`vueEnd is ${vueEnd}`);
+
+    configFile.addCommandLineTool(babelCli);
 }
 

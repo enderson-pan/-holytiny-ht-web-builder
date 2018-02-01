@@ -9,7 +9,7 @@ const RAW_CONFIG_FILE_PATH = '../data/.htwbrc';
 const NPMIGNORE_FILE_PATH = '../.npmignore';
 const RAW_NPMIGNORE_FILE_PATH = '../data/.npmignore';
 
-export default class ConfigFile{
+class ConfigFile{
     constructor () {
         /*
         1. If there's no package.json, exit.
@@ -17,6 +17,8 @@ export default class ConfigFile{
            .htwbrc to .npmignore. If .npmignore doesn't exist, create one.
          */
         const self = this;
+
+        self.commandLineTools = [];
 
         self.packageJsonPath = __dirname + '/' + PACKAGE_JSON_PATH;
 
@@ -59,4 +61,14 @@ export default class ConfigFile{
             }
         }
     }
+
+    addCommandLineTool (commandLineTool) {
+        const self = this;
+
+        self.commandLineTools.push(commandLineTool);
+    }
 }
+
+const theConfigFile = new ConfigFile();
+
+export default theConfigFile;
