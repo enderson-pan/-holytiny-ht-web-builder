@@ -2,13 +2,22 @@
     "name": "htweb-builder-cli",
     "version": "0.0.2",
     "description": "A CLI tool to generate npm scripts for both front-end and back-end projects to make the build process convenient.",
-    "main": "index.js",
+    "main": "./dist/index.js",
     "repository": "https://github.com/enderson-pan/-holytiny-ht-web-builder.git",
     "author": "Sake <pan.ziqiang@holytiny.com>",
     "license": "MIT",
     "bin": {
-        "htwb": "index.js"
+        "htwb": "./dist/index.js"
     },
     "preferGlobal": true,
-    "private": false
+    "private": false,
+    "scripts": {
+        "babel": "babel ./src -d ./dist",
+        "babel:watch": "babel ./src -d ./dist -w"
+    },
+    "dependencies": {
+        "babel-cli": "6.26.0",
+        "babel-polyfill": "6.26.0",
+        "babel-preset-env": "1.6.1"
+    }
 }
