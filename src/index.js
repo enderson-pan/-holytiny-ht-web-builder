@@ -7,8 +7,8 @@ import theConfigFile from './ConfigFile';
 
 import BabelCli from './Babel/Babel';
 
-import FeathersCli from './BackEnd/Feathers/Feathers';
-import VueCli from './FrontEnd/Vue/Vue';
+import FeathersCli from './Feathers/Feathers';
+import VueCli from './Vue/Vue';
 
 logger.level = 'debug';
 
@@ -25,7 +25,7 @@ try {
 
 function main() {
     logger.debug(`${__dirname}`);
-    const configFile = theConfigFile;
+
     const babelCli = new BabelCli();
     const babelEnd = babelCli.whichEnd();
     logger.debug(`babelEnd is ${babelEnd}`);
@@ -39,6 +39,6 @@ function main() {
     const vueEnd = vueCli.whichEnd();
     logger.debug(`vueEnd is ${vueEnd}`);
 
-    configFile.addCommandLineTool(babelCli);
+    theConfigFile.addCommandLineTool(babelCli);
 }
 
