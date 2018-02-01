@@ -2,12 +2,25 @@
 
 require('babel-polyfill');
 
-const myFunc = msg => {
-    console.log('msg');
-};
+import logger from 'winston';
+import ConfigFile from './ConfigFile';
 
-const test = msg => {
+logger.level = 'debug';
 
-};
+try {
+    main();
+} catch (err) {
+    console.log(err.message);
+    console.log('programme exits.');
+}
 
-console.log('ht web builder!');
+/*
+
+ */
+
+function main() {
+    logger.debug(`${__dirname}`);
+    let configFile = new ConfigFile();
+    logger.debug(configFile.configFilePath);
+}
+
