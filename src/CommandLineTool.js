@@ -26,6 +26,16 @@ export class CommandLineTool {
     whichEnd () {
         return CommandLineToolConst.ENDS.bothEnds;
     }
+
+    // template method
+    genScript() {
+        const nodeEnv = genNodeEnv();
+        const cmd = genCmd();
+        const userOption = genUserOption();
+        const script = nodeEnv + cmd + userOption;
+
+        return script;
+    }
 }
 
 export class FrontEnd extends CommandLineTool {
