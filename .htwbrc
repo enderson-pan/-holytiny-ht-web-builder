@@ -1,6 +1,36 @@
 {
+    "end": {
+        "value": "back",
+        "candidates": ["back", "front"]
+    },
     "NODE_ENV": {
         "value": "development",
         "candidates": ["production", "development"]
+    },
+    "transpiler": {
+        "class": {
+            "meta": {
+                "name": "Babel"
+            },
+            "content": {
+                "sourceDir": ["src"],
+                "userOptions": ""
+            }
+        }
+    },
+    "bundler": {
+    },
+    "executor": {
+        "class": {
+            "meta": {
+                "name": "Nodemon"
+            },
+            "content": {
+                "sourceDir": ["lib"],
+                "userOptions": ""
+            }
+        }
+    },
+    "deployer": {
     }
 }
