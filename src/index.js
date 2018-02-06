@@ -11,6 +11,7 @@ import ReflectionFactory from './ReflectionFactory';
 
 import Babel from './Transpiler/Babel/Babel';
 import Nodemon from './Executor/Nodemon/Nodemon';
+import Deployer from './Deployer/Deployer';
 
 
 
@@ -37,6 +38,7 @@ function before_main() {
     // init class
     ReflectionFactory.addClass(Babel);
     ReflectionFactory.addClass(Nodemon);
+    ReflectionFactory.addClass(Deployer);
 }
 
 function main() {
@@ -46,6 +48,7 @@ function main() {
     let parseRes = parser.grammarList();
 
     let generator = new Generator(parseRes);
+    generator.generate();
 
     logger.info('the end of the programme');
 }

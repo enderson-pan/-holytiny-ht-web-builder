@@ -48,7 +48,7 @@ export default class Parser {
         const self = this;
         const rawData = fs.readFileSync(self.configFilePath);
         if (!rawData) {
-            throw new Error('Cannot read .htwbrc, please check it.');
+            throw new Error('Cannot read htwb.json, please check it.');
         }
 
         return JSON.parse(rawData);

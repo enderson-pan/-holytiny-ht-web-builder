@@ -1,0 +1,36 @@
+{
+    "end": {
+        "value": "back",
+        "candidates": ["back", "front"]
+    },
+    "NODE_ENV": {
+        "value": "development",
+        "candidates": ["production", "development"]
+    },
+    "transpiler": {
+        "class": {
+            "meta": {
+                "name": "Babel"
+            },
+            "content": {
+                "sourceDir_": ["src"],
+                "userOptions_": ""
+            }
+        }
+    },
+    "bundler": {
+    },
+    "executor": {
+    },
+    "deployer": {
+        "class": {
+            "meta": {
+                "name": "Deployer"
+            },
+            "content": {
+                "sourceDir_": ["lib"],
+                "userOptions_": ""
+            }
+        }
+    }
+}

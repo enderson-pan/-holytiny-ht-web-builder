@@ -16,4 +16,10 @@ export default class Generator {
             self.commandLineTools.push(cmdLineTool);
         }
     }
+
+    generate () {
+        for (const tool of this.commandLineTools) {
+            tool.generate();
+        }
+    }
 }

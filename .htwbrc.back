@@ -13,8 +13,8 @@
                 "name": "Babel"
             },
             "content": {
-                "sourceDir": ["src"],
-                "userOptions": ""
+                "sourceDir_": ["src"],
+                "userOptions_": ""
             }
         }
     },
@@ -26,9 +26,9 @@
                 "name": "Nodemon"
             },
             "content": {
-                "sourceDir": ["lib"],
+                "sourceDir_": ["lib"],
                 "otherDir": [""],
-                "userOptions": ""
+                "userOptions_": ""
             }
         }
     },
