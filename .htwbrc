@@ -27,6 +27,7 @@
             },
             "content": {
                 "sourceDir": ["lib"],
+                "otherDir": [""],
                 "userOptions": ""
             }
         }

@@ -1,7 +1,6 @@
 import fs from 'fs';
 
-import theConfigFile from './ConfigFile';
-import ReflectionFactory from './ReflectionFactory';
+import ConfigFile from './ConfigFile';
 
 //const PARSE_NODES = ['transpiler', 'bundler', 'executor', 'deployer'];
 
@@ -10,6 +9,7 @@ export default class Parser {
     constructor () {
         const self = this;
 
+        const theConfigFile = new ConfigFile();
         self.configFilePath = theConfigFile.configFilePath;
         self.parseResult = new LinkedList(); // Bidirectional list header.
 

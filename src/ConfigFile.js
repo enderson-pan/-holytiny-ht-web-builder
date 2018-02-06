@@ -1,5 +1,4 @@
 import fs from 'fs';
-import inquirer from 'inquirer';    // talk to user
 
 const PACKAGE_JSON_PATH = '../package.json';
 
@@ -9,7 +8,9 @@ const RAW_CONFIG_FILE_PATH = '../data/.htwbrc';
 const NPMIGNORE_FILE_PATH = '../.npmignore';
 const RAW_NPMIGNORE_FILE_PATH = '../data/.npmignore';
 
-class ConfigFile{
+let instance = null;
+
+export default class ConfigFile {
     constructor () {
         /*
         1. If there's no package.json, exit.
@@ -17,6 +18,12 @@ class ConfigFile{
            .htwbrc to .npmignore. If .npmignore doesn't exist, create one.
          */
         const self = this;
+
+        if (!instance) {
+            instance = self;
+        } else {
+            return instance;
+        }
 
         self.commandLineTools = [];
 
@@ -68,7 +75,3 @@ class ConfigFile{
         self.commandLineTools.push(commandLineTool);
     }
 }
-
-const theConfigFile = new ConfigFile();
-
-export default theConfigFile;
