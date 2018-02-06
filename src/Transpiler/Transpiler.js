@@ -1,7 +1,7 @@
-import CommandLineTool from '../CommandLineTool';
+import {TaskTool} from '../CommandLineTool';
 
-export default class Transpiler extends CommandLineTool {
-    constructor () {
-        super();
+export default class Transpiler extends TaskTool {
+    constructor (content, nextContent) {
+        super(content, nextContent);
     }
 }

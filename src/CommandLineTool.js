@@ -2,16 +2,31 @@
 Abstract class of command line tool to generate npm script.
  */
 
-export default class CommandLineTool {
+class CommandLineTool {
     constructor () {
         const self = this;
-
-        self.isWin = /^win/.test(process.platform);
+        self.isWin_ = /^win/.test(process.platform);
     }
 
     isWindows () {
-        const self = this;
+        return this.isWin_;
+    }
+}
 
-        return self.isWin;
+export class TaskTool extends CommandLineTool {
+    constructor (content, nextContent) {
+        super();
+
+        const self = this;
+        self.content_ = content;
+        self.nextContent_ = nextContent;
+    }
+
+    content () {
+        return this.content_;
+    }
+
+    nextContent () {
+        return this.nextContent_;
     }
 }

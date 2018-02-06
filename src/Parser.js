@@ -92,11 +92,12 @@ class LinkedList {
 }
 
 class Node {
-    constructor (className, classContent) {
+    constructor (className, classContent, nextClassContent) {
         const self = this;
 
         self.className = className;
         self.content = classContent;
+        self.nextClassContent = nextClassContent;
 
         self.list = {};
         self.list.child = null;

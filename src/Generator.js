@@ -7,7 +7,12 @@ export default class Generator {
         self.commandLineTools = [];
 
         for (let iter = grammarList.header.list.child; iter !== null; iter = iter.list.child) {
-            const cmdLineTool = ReflectionFactory.create(iter.className, iter.content);
+            let cmdLineTool;
+            if (iter.list.child) {
+                cmdLineTool = ReflectionFactory.create(iter.className, iter.content, iter.list.child.content);
+            } else {
+                cmdLineTool = ReflectionFactory.create(iter.className, iter.content, null);
+            }
             self.commandLineTools.push(cmdLineTool);
         }
     }
