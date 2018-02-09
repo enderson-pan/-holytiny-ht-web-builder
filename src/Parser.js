@@ -2,7 +2,7 @@ import fs from 'fs';
 
 import ConfigFile from './ConfigFile';
 
-//const PARSE_NODES = ['transpiler', 'bundler', 'executor', 'deployer'];
+const PARSE_NODES = ['transpiler', 'bundler', 'executor', 'deployer'];
 
 
 export default class Parser {
@@ -19,19 +19,12 @@ export default class Parser {
     parseConfigFile () {
         const self = this;
 
-        const fileContent = self.getConfigFileContent();
-        //let transpiler = ReflectionFactory.create( ((fileContent['transpiler'])['class'])['name'] );
-        const transpilerNode = Parser.createNode(fileContent, 'transpiler');
-        const bundlerNode = Parser.createNode(fileContent, 'bundler');
-        const executorNode = Parser.createNode(fileContent, 'executor');
-        const deployerNode = Parser.createNode(fileContent, 'deployer');
-
-        // Assemble nodes.
         const nodes = [];
-        nodes.push(transpilerNode);
-        nodes.push(bundlerNode);
-        nodes.push(executorNode);
-        nodes.push(deployerNode);
+        const fileContent = self.getConfigFileContent();
+        for (const classType of PARSE_NODES) {
+            const node = Parser.createNode(fileContent, classType);
+            nodes.push(node);
+        }
 
         for (const node of nodes) {
             if (node) {

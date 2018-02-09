@@ -1,13 +1,9 @@
 import fs from 'fs';
-import path from 'path';
 
-const PACKAGE_JSON_PATH = '../package.json';
+import logger from 'winston';
 
-const CONFIG_FILE_PATH = '../htwb.json';
-const RAW_CONFIG_FILE_PATH = '../data/htwb.json';
+import FilePath from './FilePath';
 
-const NPMIGNORE_FILE_PATH = '../.npmignore';
-const RAW_NPMIGNORE_FILE_PATH = '../data/.npmignore';
 
 let instance = null;
 
@@ -28,13 +24,15 @@ export default class ConfigFile {
 
         self.commandLineTools = [];
 
-        self.packageJsonPath = path.join(__dirname, PACKAGE_JSON_PATH);
+        const filePath = new FilePath();
 
-        self.configFilePath = path.join(__dirname, CONFIG_FILE_PATH);
-        self.rawConfigFilePath = path.join(__dirname, RAW_CONFIG_FILE_PATH);
+        self.packageJsonPath = filePath.packageJsonPath();
 
-        self.npmignoreFilePath = path.join(__dirname, NPMIGNORE_FILE_PATH);
-        self.rawNpmignoreFilePath = path.join(__dirname, RAW_NPMIGNORE_FILE_PATH);
+        self.configFilePath = filePath.configFilePath();
+        self.rawConfigFilePath = filePath.rawConfigFilePath();
+
+        self.npmignoreFilePath = filePath.npmignoreFilePath();
+        self.rawNpmignoreFilePath = filePath.rawNpmignoreFilePath();
 
         self.init();
     }
@@ -48,15 +46,15 @@ export default class ConfigFile {
         }
 
         if (!fs.existsSync(self.configFilePath)) {
-            console.log('There is no htwb.json file, create one.');
+            logger.info('There is no htwb.json file, create one.');
             fs.copyFileSync(self.rawConfigFilePath, self.configFilePath);
         }
 
         if (!fs.existsSync(self.npmignoreFilePath)) {
-            console.log('There is no .npmignore file, create one.');
+            logger.info('There is no .npmignore file, create one.');
             fs.copyFileSync(self.rawNpmignoreFilePath, self.npmignoreFilePath);
         } else {
-            console.log('There is .npmignore file. Add htwb.json to it if it does not contain this item');
+            logger.info('There is .npmignore file. Add htwb.json to it if it does not contain this item');
             let npmignoreContent = fs.readFileSync(self.npmignoreFilePath, 'utf8');
             if (!npmignoreContent) {
                 throw new Error(`Cannot open ${self.npmignoreFilePath}`);
@@ -64,7 +62,7 @@ export default class ConfigFile {
 
             const index = npmignoreContent.indexOf('htwb.json');
             if (index === -1) {
-                console.log('Add htwb.json to .npmignore');
+                logger.info('Add htwb.json to .npmignore');
                 fs.appendFileSync(self.npmignoreFilePath, 'htwb.json');
             }
         }

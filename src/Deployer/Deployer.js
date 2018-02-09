@@ -12,5 +12,4 @@ export default class Deployer extends TaskTool {
     generate () {
         // Do nothing.
     }
-
 }

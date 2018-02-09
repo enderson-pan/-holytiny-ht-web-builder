@@ -13,7 +13,7 @@
                 "name": "Babel"
             },
             "content": {
-                "sourceDir_": ["src"],
+                "sourceDir_": ["./src"],
                 "userOptions_": ""
             }
         }
@@ -28,7 +28,7 @@
                 "name": "Deployer"
             },
             "content": {
-                "sourceDir_": ["lib"],
+                "sourceDir_": ["./lib"],
                 "userOptions_": ""
             }
         }

@@ -3,35 +3,33 @@ Abstract class of command line tool to generate npm script.
  */
 
 import fs from 'fs';
-import path from 'path';
 import logger from "winston/lib/winston";
+
 
 class CommandLineTool {
     constructor () {
         const self = this;
         self.isWin_ = /^win/.test(process.platform);
-        this.projectPath_ = path.join(__dirname, '../');
     }
 
     isWindows () {
         return this.isWin_;
     }
 
-    getConcreteThis () {
-        return this;
-    }
-
     generate () {
-        const  templateFileContent = this.templateFileContent();
+        let  templateFileContent = this.templateFileContent();
         if (!templateFileContent) {
             throw new Error('Cannot get template content!');
         }
-        const self = this.getConcreteThis();
+        const self = this;
+        templateFileContent = templateFileContent.replace(/\r?\n|\r/g, '');
+        templateFileContent = `\`${templateFileContent}\``;
         const functionBody = `return ${templateFileContent}`;
         const getTemplate = new Function('self', functionBody);
-        // logger.debug('getTemplate: ', getTemplate(self));
         const generatedCmd = getTemplate(self);
         logger.debug('generatedCmd: ' + generatedCmd);
+
+
     }
 
     setClassTemplateFilePath (filePath) {
@@ -50,10 +48,6 @@ class CommandLineTool {
 
     templateFileContent () {
         return this.templateFileConent_;
-    }
-
-    projectPath () {
-        return this.projectPath_;
     }
 }
 
