@@ -23,7 +23,7 @@ Thumbs.db
 node_modules
 
 # Compiled files
-dist
+./lib
 
 # Users Environment Variables
 .lock-wscript

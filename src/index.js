@@ -2,12 +2,30 @@
 
 require('babel-polyfill');
 
-const myFunc = msg => {
-    console.log('msg');
-};
+import App from './App';
+import program from 'caporal';
 
-const test = msg => {
+export const logger = program.logger();
 
-};
+try {
+    main();
+} catch (err) {
+    logger.error('exception! ' + err.message);
+    logger.error('programme exits!');
+    process.exit(1);
+}
 
-console.log('ht web builder!');
+/*
+
+ */
+
+function main() {
+    //logger.debug(`${__dirname}`);
+
+    let theApp = new App();
+
+    theApp.run();
+
+    logger.info('Execute programme successfully!');
+}
+
