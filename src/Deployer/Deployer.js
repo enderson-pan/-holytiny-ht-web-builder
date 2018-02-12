@@ -1,5 +1,5 @@
 import {TaskTool} from '../CommandLineTool';
-import logger from "winston/lib/winston";
+import {logger} from "../index";
 
 export default class Deployer extends TaskTool {
     constructor (content, nextContent) {

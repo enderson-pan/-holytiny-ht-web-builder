@@ -2005,7 +2005,7 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2"
 
-winston@2.4.0, winston@^2.3.1:
+winston@^2.3.1:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/winston/-/winston-2.4.0.tgz#808050b93d52661ed9fb6c26b3f0c826708b0aee"
   dependencies:

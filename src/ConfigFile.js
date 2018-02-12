@@ -1,7 +1,6 @@
 import fs from 'fs';
 
-import logger from 'winston';
-
+import {logger} from "./index";
 import FilePath from './FilePath';
 
 

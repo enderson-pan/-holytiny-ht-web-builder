@@ -1,6 +1,6 @@
-import logger from 'winston';
 import path from 'path';
 
+import {logger} from "../../index";
 import Transpiler from '../Transpiler';
 import FilePath from '../../FilePath';
 

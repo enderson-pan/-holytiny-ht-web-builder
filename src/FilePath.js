@@ -37,7 +37,7 @@ export default class FilePath {
         return this.projectPath_;
     }
 
-    workingPath() {
+    pwdPath() {
         return this.pwd_;
     }
 

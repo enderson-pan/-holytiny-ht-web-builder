@@ -3,7 +3,8 @@ Abstract class of command line tool to generate npm script.
  */
 
 import fs from 'fs';
-import logger from "winston/lib/winston";
+
+import {logger} from "./index";
 
 
 class CommandLineTool {

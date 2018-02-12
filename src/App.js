@@ -6,13 +6,13 @@ import Deployer from "./Deployer/Deployer";
 import Nodemon from "./Executor/Nodemon/Nodemon";
 import ConfigFile from "./ConfigFile";
 import PackageJson from './PackageJson';
+import FilePath from "./FilePath";
 
 import program from 'caporal';
-import logger from 'winston';
 import clear from 'clear';
 import chalk from 'chalk';
 import figlet from 'figlet';
-import FilePath from "./FilePath";
+
 
 let instance = null;
 export default class App {
@@ -23,19 +23,18 @@ export default class App {
         }
         instance = this;
 
-        // init command line interface
-        this.initCmdInterface();
-
         // init singleton object
         App.initSingleton();
         // add class meta to reflection factory.
         App.initClass();
-
-
         // init all objects needed.
         this.parser_ = new Parser();
         const parseRes_ = this.parser_.grammarList();
         this.generator_ = new Generator(parseRes_);
+
+        const filePath = new FilePath();
+        this.projectPackageJson_ = new PackageJson(filePath.packageJsonPath()).content();
+        this.pwdPackageJson_ = new PackageJson(filePath.workingPackageJsonPath()).content();
     }
 
     static initSingleton() {
@@ -48,7 +47,7 @@ export default class App {
         ReflectionFactory.addClass(Deployer);
     }
 
-    initCmdInterface () {
+    run () {
         clear();
         // hello message
         console.log(
@@ -57,9 +56,7 @@ export default class App {
             )
         );
         const self = this;
-        const filePath = new FilePath();
-        const projectPackageJson = new PackageJson(filePath.packageJsonPath()).content();
-        const version = projectPackageJson['version'];
+        const version = self.projectPackageJson_['version'];
         program
             .version(version)
             .description('Generate npm scripts for automation.');
@@ -71,32 +68,27 @@ export default class App {
                 self.createProject();
             });
         program
-            .command('backend', 'Generate back end building npm scripts.')
+            .command('backend', 'Generate back end building npm scripts or command line building npm scripts.')
             .alias('b')
-            .action(() => {
-                self.generateBackend();
+            .action((args, options, logger) => {
+                self.generateBackend(args, options, logger);
             });
 
         program.parse(process.argv);
-
-        /*if(!program.args.length) {
-            program.help();
-        } else {
-            logger.info('Keywords: ' + program.args);
-        }*/
     }
 
-    createProject () {
-        logger.debug('Create empty project!');
-        logger.debug(`${__dirname}`);
-        logger.debug(`${process.env.PWD}`);
+    createProject (args, options, logger) {
+        logger.info('Create empty project!');
+        logger.info(`${__dirname}`);
+        logger.info(`${process.env.PWD}`);
     }
 
-    generateBackend () {
-        logger.debug('Generate back end npm scripts!');
-    }
-
-    run () {
-        this.generator_.generate();
+    generateBackend (args, options, logger) {
+        logger.info('Generate back end npm scripts...');
+        /*logger.debug('args: ', args);
+        logger.debug('options: ', options);*/
+        let scriptSection = this.pwdPackageJson_['scripts'];
+        logger.debug('scripts section in package.json: ', scriptSection);
+        this.generator_.generate(scriptSection);
     }
 }

@@ -2,11 +2,10 @@
 
 require('babel-polyfill');
 
-import logger from 'winston';
-
 import App from './App';
+import program from 'caporal';
 
-logger.level = 'debug';
+export const logger = program.logger();
 
 try {
     main();
