@@ -3,9 +3,7 @@ Abstract class of command line tool to generate npm script.
  */
 
 import fs from 'fs';
-
-import {logger} from "./index";
-
+import winston from 'winston';
 
 class CommandLineTool {
     constructor () {
@@ -17,20 +15,22 @@ class CommandLineTool {
         return this.isWin_;
     }
 
-    generate () {
+    generate (scriptSection) {
         let  templateFileContent = this.templateFileContent();
         if (!templateFileContent) {
             throw new Error('Cannot get template content!');
         }
         const self = this;
-        templateFileContent = templateFileContent.replace(/\r?\n|\r/g, '');
-        templateFileContent = `\`${templateFileContent}\``;
-        const functionBody = `return ${templateFileContent}`;
-        const getTemplate = new Function('self', functionBody);
-        const generatedCmd = getTemplate(self);
-        logger.debug('generatedCmd: ' + generatedCmd);
-
-
+        Object.keys(templateFileContent).forEach((key, index) => {
+            let content = templateFileContent[key];
+            content = content.replace(/\r?\n|\r/g, '');
+            content = `\`${content}\``;
+            const functionBody = `return ${content}`;
+            const getTemplate = new Function('self', functionBody);
+            const generatedCmd = getTemplate(self);
+            winston.debug('CommandLineTool.generate() generatedCmd: ' + generatedCmd);
+            scriptSection[key] = generatedCmd;
+        });
     }
 
     setClassTemplateFilePath (filePath) {
@@ -43,12 +43,12 @@ class CommandLineTool {
         if (!fs.existsSync(this.templateFilePath_)) {
             throw new Error(`The class template file ${this.templateFilePath_} does not exist!`);
         }
-
-        this.templateFileConent_ = fs.readFileSync(this.templateFilePath_, 'utf8');
+        const content = fs.readFileSync(this.templateFilePath_, 'utf8');
+        this.templateFileContent_ = JSON.parse(content);
     }
 
     templateFileContent () {
-        return this.templateFileConent_;
+        return this.templateFileContent_;
     }
 }
 

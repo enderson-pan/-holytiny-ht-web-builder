@@ -1,12 +1,13 @@
 import {TaskTool} from '../CommandLineTool';
-import {logger} from "../index";
+
+import winston from 'winston';
 
 export default class Deployer extends TaskTool {
     constructor (content, nextContent) {
         super(content, nextContent);
 
-        logger.debug(`Deployer created, content is: ${JSON.stringify(this.content())}`);
-        logger.debug(`Deployer created, next content is: ${JSON.stringify(this.nextContent())}`);
+        winston.debug(`Deployer created, content is: ${JSON.stringify(this.content())}`);
+        winston.debug(`Deployer created, next content is: ${JSON.stringify(this.nextContent())}`);
     }
 
     generate () {
