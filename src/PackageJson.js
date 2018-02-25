@@ -14,7 +14,12 @@ export default class PackageJson {
         const fileContent = fs.readFileSync(packageJsonPath, 'utf8');
         winston.debug(`PackageJson constructor(): fileContent ${fileContent}`);
 
-        this.content_ = JSON.parse(fileContent);
+        try {
+            this.content_ = JSON.parse(fileContent);
+        } catch (e) {
+            throw e;
+        }
+
         winston.debug(`PackageJson constructor(): this.content_ ${this.content_}`);
     }
 
@@ -34,8 +39,15 @@ export default class PackageJson {
     }
 
     isScriptExist () {
-        const contentStrings = JSON.stringify(this.content_);
-        return /ht-/.test(contentStrings);
+        const scripts = this.content_['scripts'];
+        for (let property in scripts) {
+            if (scripts.hasOwnProperty(property)) {
+                if (/ht-/.test(property)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     removeGeneratedScripts (logger) {

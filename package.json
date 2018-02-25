@@ -14,7 +14,9 @@
     "scripts": {
         "babel": "babel ./src -d ./lib",
         "babel:watch": "babel ./src -d ./lib -w",
-        "start": "node lib"
+        "start": "node lib",
+        "ht-transpiler": "Babel ./src -d ./lib ",
+        "ht-transpiler:watch": "Babel ./src -d ./lib  -w"
     },
     "dependencies": {
         "babel-cli": "6.26.0",
