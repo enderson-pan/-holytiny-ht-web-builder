@@ -27,6 +27,6 @@ function main() {
 
     theApp.run();
 
-    winston.info('Execute programme successfully!');
+    //winston.info('Execute programme successfully!');
 }
 

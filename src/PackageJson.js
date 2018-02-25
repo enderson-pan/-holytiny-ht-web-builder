@@ -37,4 +37,20 @@ export default class PackageJson {
         const contentStrings = JSON.stringify(this.content_);
         return /ht-/.test(contentStrings);
     }
+
+    removeGeneratedScripts (logger) {
+        logger.debug('PackageJson.removeGeneratedScripts()');
+        let scripts = this.content_['scripts'];
+        logger.debug(`PackageJson.removeGeneratedScripts() scripts: ${JSON.stringify(scripts, null, 4)}`);
+        logger.debug(`PackageJson.removeGeneratedScripts() iterate scripts for ht- and delete it`);
+        Object.keys(scripts).forEach( (key, index) => {
+            if (/ht-/.test(key)) {
+                logger.debug(`PackageJson.removeGeneratedScripts() scripts.${key}: ${scripts[key]}:`);
+                delete scripts[key];
+            }
+        });
+        logger.debug(`PackageJson.removeGeneratedScripts() after delete: ${JSON.stringify(scripts, null, 4)}`);
+
+        this.writeScriptsToPackageJsonFile(scripts);
+    }
 }

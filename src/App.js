@@ -11,6 +11,7 @@ import program from 'caporal';
 import clear from 'clear';
 import chalk from 'chalk';
 import figlet from 'figlet';
+import inquirer from 'inquirer';
 
 
 
@@ -109,7 +110,21 @@ export default class App {
         this.pwdPackageJson_.writeScriptsToPackageJsonFile(scriptSection);
     }
 
-    removeScripts(args, options, logger) {
-        
+    async removeScripts(args, options, logger) {
+        let questions = [{
+            name: 'sureDelete',
+            message: 'Are you sure to delete all generated scripts?',
+            type: 'confirm',
+            default: false,
+            validate: (str) => {
+                return (str === 'Y' || str === 'n');
+            }
+        }];
+
+        let answers = await inquirer.prompt(questions);
+        logger.debug(`App.removeScripts() answers: ${JSON.stringify(answers)}`);
+        if (answers['sureDelete']) {
+            this.pwdPackageJson_.removeGeneratedScripts(logger);
+        }
     }
 }
