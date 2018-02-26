@@ -1,6 +1,6 @@
 import fs from 'fs';
+import winston from 'winston';
 
-import {logger} from "./index";
 import FilePath from './FilePath';
 
 
@@ -45,15 +45,15 @@ export default class ConfigFile {
         }
 
         if (!fs.existsSync(self.configFilePath)) {
-            logger.info('There is no htwb.json file, create one.');
+            winston.info('There is no htwb.json file, create one.');
             fs.copyFileSync(self.rawConfigFilePath, self.configFilePath);
         }
 
         if (!fs.existsSync(self.npmignoreFilePath)) {
-            logger.info('There is no .npmignore file, create one.');
+            winston.info('There is no .npmignore file, create one.');
             fs.copyFileSync(self.rawNpmignoreFilePath, self.npmignoreFilePath);
         } else {
-            logger.info('There is .npmignore file. Add htwb.json to it if it does not contain this item');
+            winston.info('There is .npmignore file. Add htwb.json to it if it does not contain this item');
             let npmignoreContent = fs.readFileSync(self.npmignoreFilePath, 'utf8');
             if (!npmignoreContent) {
                 throw new Error(`Cannot open ${self.npmignoreFilePath}`);
@@ -61,7 +61,7 @@ export default class ConfigFile {
 
             const index = npmignoreContent.indexOf('htwb.json');
             if (index === -1) {
-                logger.info('Add htwb.json to .npmignore');
+                winston.info('Add htwb.json to .npmignore');
                 fs.appendFileSync(self.npmignoreFilePath, 'htwb.json');
             }
         }

@@ -3,15 +3,15 @@
 require('babel-polyfill');
 
 import App from './App';
-import program from 'caporal';
+import winston from 'winston';
 
-export const logger = program.logger();
+winston.level = 'debug';
 
 try {
     main();
 } catch (err) {
-    logger.error('exception! ' + err.message);
-    logger.error('programme exits!');
+    winston.error('exception! ' + err.message);
+    winston.error('programme exits!');
     process.exit(1);
 }
 
@@ -20,12 +20,13 @@ try {
  */
 
 function main() {
-    //logger.debug(`${__dirname}`);
+    winston.debug(`project locates in ${__dirname}`);
+    winston.debug(`programme runs in ${process.env.PWD}`);
 
     let theApp = new App();
 
     theApp.run();
 
-    logger.info('Execute programme successfully!');
+    //winston.info('Execute programme successfully!');
 }
 

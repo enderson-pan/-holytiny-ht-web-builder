@@ -1,13 +1,13 @@
 import path from 'path';
-
-import {logger} from "../../index";
+import winston from 'winston'
 import Transpiler from '../Transpiler';
 import FilePath from '../../FilePath';
 
-const CLASS_CONFIG_FILE_PATH = './data/Transpiler/Babel/template.txt';  // relative fo project path
+const CLASS_CONFIG_FILE_PATH = './data/Transpiler/Babel/template.json';  // relative fo project path
 
 export default class Babel extends Transpiler {
     constructor (content, nextContent) {
+
         if (!nextContent) {
             throw new Error('Cannot create Babel object, because no output dir!');
         }
@@ -16,9 +16,9 @@ export default class Babel extends Transpiler {
         // set template path to super and get the file content.
         this.setClassTemplateFilePath();
 
-        logger.debug(`Babel created, content is: ${JSON.stringify(this.content())}`);
-        logger.debug(`Babel created, next content is: ${JSON.stringify(this.nextContent())}`);
-        logger.debug(`And is windows? ${this.isWindows()}`);
+        winston.debug(`Babel created, content is: ${JSON.stringify(this.content())}`);
+        winston.debug(`Babel created, next content is: ${JSON.stringify(this.nextContent())}`);
+        winston.debug(`And is windows? ${this.isWindows()}`);
 
         this.cmdName_ = 'Babel';
         this.sourceDir_ = (content['sourceDir_'])[0];
